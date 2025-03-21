@@ -1,0 +1,19 @@
+sudo apt-install samba -y
+clear
+sudo systemctl enable --now smbd
+sudo mkdir -p /srv/samba_compartida
+for i in {1..100}; do echo "Archivo Adrian$i" > "adrian$i.txt"; done
+sudo groupadd smbgroup
+sudo useradd -M -s /sbin/nologin sambauser
+sudo usermod -aG smbgroup sambauser
+sudo smbpasswd -a sambauser
+prueba1234
+prueba1234
+sudo chown -R sambauser:smbgroup /srv/sambacompartida
+sudo chmod -R 770 /srv/samba_compartida
+sudo nano /etc/samba/smb.conf
+sudo systemctl restart smbd
+sudo ufw allow samba
+sudo ufw reload
+sudo cat adrian99.txt
+sudo libreoffice adrian99.txt
