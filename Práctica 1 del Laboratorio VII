@@ -1,0 +1,17 @@
+sudo apt update && sudo apt install -y nfs-kernel-server
+sudo mkdir -p /mnt/os3 && cd /mnt/os3/
+sudo chmod -R 777 /mnt/os3/
+for i in {1..100}; do echo "Archivo Adrian$i" > "adrian$i.txt"; done
+cat Adrian44.txt
+sudo nano /etc/exports
+/mnt/os3 10.0.0.25(rw,sync,no_subtree_check)
+sudo exportfs -a
+sudo systemctl restart nfs-kernel-server
+
+###MÁQUINA CLIENTE###
+sudo mkdir -p /mnt/nfs_os3
+sudo ufw allow from 10.0.0.25 to any port nfs
+sudo mount 10.0.0.24:/mnt/os3 /mnt/os3/
+sudo nano /etc/fstab
+sudo reboot
+ls /mnt/nfs_os3
