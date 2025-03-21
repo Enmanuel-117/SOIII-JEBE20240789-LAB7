@@ -1,0 +1,13 @@
+sudo apt install -y samba samba-dsdb-modules sambavfs-modules krb5-user krb5-config krb5-kdc krb5-admin-server dnsutils
+OK OK
+sudo nano /etc/hosts
+ifconfig (tomando la ip para revisar)
+sudo nano /etc/krb5.conf
+sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
+sudo samba-tool domain provision --user-rfc2307 --interactive
+sudo systemctl restart samba-ad-dc
+sudo samba-tool user create lanegracubana m20240789@
+
+#####Windows#####
+ping so3.inet
+Add-Computer -DomainName "so3.inet" -Restart
